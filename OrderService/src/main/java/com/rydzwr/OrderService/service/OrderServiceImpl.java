@@ -1,6 +1,7 @@
 package com.rydzwr.OrderService.service;
 
 import com.rydzwr.OrderService.entity.Order;
+import com.rydzwr.OrderService.extrenal.client.ProductService;
 import com.rydzwr.OrderService.model.OrderRequest;
 import com.rydzwr.OrderService.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,16 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ProductService productService;
+
     @Override
     public int placeOrder(OrderRequest orderRequest) {
         log.info("Placing Order Request {}", orderRequest);
+
+        productService.reduceQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
+
+        log.info("Creating Order With Status CREATED");
 
         var order = Order.builder()
                 .productsQuantity(orderRequest.getQuantity())
@@ -34,4 +42,6 @@ public class OrderServiceImpl implements OrderService {
 
         return order.getOrderId();
     }
+
+
 }
