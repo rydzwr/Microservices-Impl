@@ -9,7 +9,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id : ORDER-SERVICE
+        - id: ORDER-SERVICE
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/order/**
@@ -20,8 +20,8 @@ spring:
                 fallbackuri: forward:/orderServiceFallBack
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
         - id: PAYMENT-SERVICE
           uri: lb://PAYMENT-SERVICE
           predicates:
@@ -33,8 +33,8 @@ spring:
                 fallbackuri: forward:/paymentServiceFallBack
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
         - id: PRODUCT-SERVICE
           uri: lb://PRODUCT-SERVICE
           predicates:
@@ -46,5 +46,13 @@ spring:
                 fallbackuri: forward:/productServiceFallBack
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
+
+okta:
+  oauth2:
+    issuer: https://dev-03742505.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oa90i7kntYAvGn0y5d7
+    client-secret: A41E3Df4hyzYelv1fwyOF3lYZzgzRjZVaM9mYUO4
+    scopes: openid, email, profile, offline_access

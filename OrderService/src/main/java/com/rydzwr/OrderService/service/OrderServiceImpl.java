@@ -1,16 +1,15 @@
 package com.rydzwr.OrderService.service;
 
-import com.netflix.discovery.converters.Auto;
 import com.rydzwr.OrderService.entity.Order;
 import com.rydzwr.OrderService.exception.CustomException;
 import com.rydzwr.OrderService.extrenal.client.PaymentService;
 import com.rydzwr.OrderService.extrenal.client.ProductService;
 import com.rydzwr.OrderService.extrenal.request.PaymentRequest;
 import com.rydzwr.OrderService.extrenal.response.PaymentResponse;
+import com.rydzwr.OrderService.extrenal.response.ProductResponse;
 import com.rydzwr.OrderService.model.OrderRequest;
 import com.rydzwr.OrderService.model.OrderResponse;
 import com.rydzwr.OrderService.repository.OrderRepository;
-import com.rydzwr.ProductService.model.ProductResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

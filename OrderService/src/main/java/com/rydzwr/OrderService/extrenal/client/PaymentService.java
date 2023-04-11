@@ -15,7 +15,7 @@ public interface PaymentService {
     @PostMapping
     public ResponseEntity<Integer> doPayment(@RequestBody PaymentRequest paymentRequest);
 
-    default void fallback(Exception e) {
+    default ResponseEntity<Integer> fallback(Exception e) {
         throw new CustomException("Payment Service Is Not Available", "UNAVAILABLE", 500);
     }
 }
